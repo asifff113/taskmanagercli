@@ -6,7 +6,7 @@
 #include "FilterStrategy.h"
 #include "Storage.h"
 
-const std::string DATA_FILE = "tasks.dat";
+const std::string DATA_FILE = "tasks.json";
 
 void printMenu() {
     std::cout << "\n============================\n";
@@ -178,8 +178,10 @@ int main() {
             case 5: sortTasks(manager); break;
             case 6: filterTasks(manager); break;
             case 7:
-                Storage::saveToFile(manager.getTasks(), DATA_FILE);
-                std::cout << "Tasks saved. Goodbye!\n";
+                if (Storage::saveToFile(manager.getTasks(), DATA_FILE))
+                    std::cout << "Tasks saved. Goodbye!\n";
+                else
+                    std::cerr << "Error: Failed to save tasks to " << DATA_FILE << "\n";
                 return 0;
             default:
                 std::cout << "Invalid choice. Try again.\n";

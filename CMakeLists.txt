@@ -12,6 +12,14 @@ endif()
 
 include(FetchContent)
 
+# ── nlohmann/json for robust serialization ──
+FetchContent_Declare(
+    json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.11.3
+)
+FetchContent_MakeAvailable(json)
+
 # ── Core library (shared by all executables) ──
 add_library(task_core STATIC
     src/Task.cpp
@@ -19,6 +27,7 @@ add_library(task_core STATIC
     src/Storage.cpp
 )
 target_include_directories(task_core PUBLIC include)
+target_link_libraries(task_core PUBLIC nlohmann_json::nlohmann_json)
 
 # ── CLI executable (simple menu) ──
 add_executable(task_manager src/main.cpp)

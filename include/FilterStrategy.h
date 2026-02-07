@@ -7,7 +7,7 @@
 class FilterStrategy {
 public:
     virtual ~FilterStrategy() = default;
-    virtual std::vector<Task> filter(const std::vector<Task>& tasks) = 0;
+    virtual std::vector<Task> filter(const std::vector<Task>& tasks) const = 0;
     virtual std::string getName() const = 0;
 };
 
@@ -16,7 +16,7 @@ class FilterByStatus : public FilterStrategy {
 public:
     explicit FilterByStatus(bool completed) : completed_(completed) {}
 
-    std::vector<Task> filter(const std::vector<Task>& tasks) override {
+    std::vector<Task> filter(const std::vector<Task>& tasks) const override {
         std::vector<Task> result;
         for (const auto& task : tasks) {
             if (task.isCompleted() == completed_) {
@@ -39,7 +39,7 @@ class FilterByPriority : public FilterStrategy {
 public:
     explicit FilterByPriority(Priority priority) : priority_(priority) {}
 
-    std::vector<Task> filter(const std::vector<Task>& tasks) override {
+    std::vector<Task> filter(const std::vector<Task>& tasks) const override {
         std::vector<Task> result;
         for (const auto& task : tasks) {
             if (task.getPriority() == priority_) {

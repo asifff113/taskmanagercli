@@ -35,6 +35,15 @@ Task* TaskManager::findTask(int id) {
     return nullptr;
 }
 
+const Task* TaskManager::findTask(int id) const {
+    auto it = std::find_if(tasks_.begin(), tasks_.end(),
+        [id](const Task& t) { return t.getId() == id; });
+    if (it != tasks_.end()) {
+        return &(*it);
+    }
+    return nullptr;
+}
+
 const std::vector<Task>& TaskManager::getTasks() const {
     return tasks_;
 }

@@ -61,3 +61,59 @@ TEST_CASE("Invalid string to priority throws exception", "[task]") {
     REQUIRE_THROWS_AS(Task::stringToPriority("INVALID"), std::invalid_argument);
     REQUIRE_THROWS_AS(Task::stringToPriority(""), std::invalid_argument);
 }
+
+// ── Input Validation Edge Cases ──
+
+TEST_CASE("Empty title throws exception", "[task][validation]") {
+    REQUIRE_THROWS_AS(
+        Task(1, "", "Desc", Priority::LOW, "2025-01-01"),
+        std::invalid_argument
+    );
+}
+
+TEST_CASE("setTitle with empty string throws exception", "[task][validation]") {
+    Task task(1, "Valid", "Desc", Priority::LOW, "2025-01-01");
+    REQUIRE_THROWS_AS(task.setTitle(""), std::invalid_argument);
+}
+
+TEST_CASE("Invalid date format throws exception", "[task][validation]") {
+    REQUIRE_THROWS_AS(
+        Task(1, "T", "D", Priority::LOW, "not-a-date"),
+        std::invalid_argument
+    );
+    REQUIRE_THROWS_AS(
+        Task(1, "T", "D", Priority::LOW, "2025-13-01"),
+        std::invalid_argument
+    );
+    REQUIRE_THROWS_AS(
+        Task(1, "T", "D", Priority::LOW, "2025-00-15"),
+        std::invalid_argument
+    );
+    REQUIRE_THROWS_AS(
+        Task(1, "T", "D", Priority::LOW, "2025-01-32"),
+        std::invalid_argument
+    );
+}
+
+TEST_CASE("Valid date formats are accepted", "[task][validation]") {
+    REQUIRE_NOTHROW(Task(1, "T", "D", Priority::LOW, "2025-01-01"));
+    REQUIRE_NOTHROW(Task(2, "T", "D", Priority::LOW, "2025-12-31"));
+    REQUIRE_NOTHROW(Task(3, "T", "D", Priority::LOW, "N/A"));
+    REQUIRE_NOTHROW(Task(4, "T", "D", Priority::LOW, ""));
+}
+
+TEST_CASE("setDueDate with invalid format throws", "[task][validation]") {
+    Task task(1, "T", "D", Priority::LOW, "2025-01-01");
+    REQUIRE_THROWS_AS(task.setDueDate("bad-date"), std::invalid_argument);
+    REQUIRE_NOTHROW(task.setDueDate("2025-06-15"));
+    REQUIRE_NOTHROW(task.setDueDate("N/A"));
+}
+
+TEST_CASE("isValidDate correctly validates dates", "[task][validation]") {
+    REQUIRE(Task::isValidDate("2025-01-01"));
+    REQUIRE(Task::isValidDate("2025-12-31"));
+    REQUIRE_FALSE(Task::isValidDate("2025-13-01"));
+    REQUIRE_FALSE(Task::isValidDate("25-01-01"));
+    REQUIRE_FALSE(Task::isValidDate("not-a-date"));
+    REQUIRE_FALSE(Task::isValidDate(""));
+}

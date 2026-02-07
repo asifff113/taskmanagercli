@@ -17,7 +17,7 @@
 
 using namespace ftxui;
 
-const std::string DATA_FILE = "tasks.dat";
+const std::string DATA_FILE = "tasks.json";
 
 // ── Helper: build a table element from a task list ──
 Element TaskTable(const std::vector<::Task>& tasks) {
@@ -117,8 +117,10 @@ int main() {
         action_id_str.clear();
     });
     auto save_button = Button("Save to File", [&] {
-        Storage::saveToFile(manager.getTasks(), DATA_FILE);
-        status_message = "Tasks saved to " + DATA_FILE;
+        if (Storage::saveToFile(manager.getTasks(), DATA_FILE))
+            status_message = "Tasks saved to " + DATA_FILE;
+        else
+            status_message = "Error: Failed to save tasks!";
     });
 
     auto task_list_container = Container::Vertical(Components{

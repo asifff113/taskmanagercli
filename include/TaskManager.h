@@ -16,6 +16,7 @@ public:
     bool markTaskCompleted(int id);
 
     Task* findTask(int id);
+    const Task* findTask(int id) const;
     const std::vector<Task>& getTasks() const;
 
     void setSortStrategy(std::unique_ptr<SortStrategy> strategy);

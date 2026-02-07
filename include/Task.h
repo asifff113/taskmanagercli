@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <stdexcept>
+#include <regex>
 
 enum class Priority { LOW, MEDIUM, HIGH };
 
@@ -10,10 +11,10 @@ public:
          Priority priority, const std::string& dueDate);
 
     int getId() const;
-    std::string getTitle() const;
-    std::string getDescription() const;
+    const std::string& getTitle() const;
+    const std::string& getDescription() const;
     Priority getPriority() const;
-    std::string getDueDate() const;
+    const std::string& getDueDate() const;
     bool isCompleted() const;
 
     void setTitle(const std::string& title);
@@ -24,6 +25,7 @@ public:
 
     std::string priorityToString() const;
     static Priority stringToPriority(const std::string& str);
+    static bool isValidDate(const std::string& date);
 
 private:
     int id_;
