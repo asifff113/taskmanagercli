@@ -1,4 +1,5 @@
 #include "Task.h"
+#include <regex>
 
 Task::Task(int id, const std::string& title, const std::string& description,
            Priority priority, const std::string& dueDate)

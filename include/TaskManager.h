@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include <algorithm>
 #include "Task.h"
 #include "SortStrategy.h"
 #include "FilterStrategy.h"
