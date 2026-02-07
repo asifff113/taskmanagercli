@@ -5,3 +5,7 @@ CompileFlags:
     - --query-driver=C:/msys64/ucrt64/bin/g++.exe
     - -IC:/msys64/ucrt64/include/c++/15.2.0
     - -IC:/msys64/ucrt64/include/c++/15.2.0/x86_64-w64-mingw32
+    - -ID:/projects/swe assignment/task-manager-cli/build/_deps/json-src/include
+    - -ID:/projects/swe assignment/task-manager-cli/build/_deps/ftxui-src/include
+    - -ID:/projects/swe assignment/task-manager-cli/build/_deps/catch2-src/src
+    - -ID:/projects/swe assignment/task-manager-cli/include
