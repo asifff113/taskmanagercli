@@ -1,0 +1,18 @@
+[
+  {
+    "completed": false,
+    "description": "Desc with \"quotes\"",
+    "dueDate": "2025-01-01",
+    "id": 1,
+    "priority": "HIGH",
+    "title": "Task with | pipe"
+  },
+  {
+    "completed": false,
+    "description": "Line1\nLine2",
+    "dueDate": "2025-06-01",
+    "id": 2,
+    "priority": "LOW",
+    "title": "Task with\nnewline"
+  }
+]

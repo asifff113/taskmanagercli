@@ -1,0 +1,5 @@
+[
+        {"id": 1, "title": "Valid", "description": "D", "priority": "HIGH", "dueDate": "2025-01-01", "completed": false},
+        {"id": 2, "title": "Missing priority"},
+        {"id": 3, "title": "Also Valid", "description": "D", "priority": "LOW", "dueDate": "2025-06-01", "completed": true}
+    ]

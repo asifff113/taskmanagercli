@@ -24,5 +24,6 @@ Thumbs.db
 # Data files created at runtime
 tasks.dat
 
-# Temp directories
-tmpclaude-*/
+# Temp directories and files
+tmpclaude-*
+*_temp.json
